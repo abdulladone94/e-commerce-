@@ -7,7 +7,7 @@ import axios from "axios";
 function App() {
   const [item, setItem] = useState([]);
 
-   useEffect(
+  useEffect(
     () =>
       axios.get("https://fakestoreapi.com/products").then((response) => {
         setItem(response.data);
@@ -18,6 +18,16 @@ function App() {
   return (
     <div className="App">
       <AppBarMUI />
+      <div>
+        {item.map((card) => {
+          return (
+            (<h1>{card.title}</h1>),
+            (<p>{card.price}</p>),
+            (<p>{card.category}</p>),
+            (<p>{card.description}</p>)
+          );
+        })}
+      </div>
     </div>
   );
 }
