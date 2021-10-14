@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import AppBarMUI from "./components/AppBarMUI";
-// import ViewProducts from './components/ViewProducts';
+import RecipeReviewCard from "./components/ItemCard";
 import axios from "axios";
 
 function App() {
@@ -18,14 +18,22 @@ function App() {
   return (
     <div className="App">
       <AppBarMUI />
+      {item.map((card, index) => {
+        return (
+          <RecipeReviewCard className='cardPosition'
+            key={index}
+            id={index}
+            title={card.title}
+            price={card.price}
+            image={card.image}
+            category={card.category}
+            description={card.description}
+          />
+        );
+      })}
       <div>
         {item.map((card) => {
-          return (
-            (<h1>{card.title}</h1>),
-            (<p>{card.price}</p>),
-            (<p>{card.category}</p>),
-            (<p>{card.description}</p>)
-          );
+          return <h1>{card.title}</h1>;
         })}
       </div>
     </div>
