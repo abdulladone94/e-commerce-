@@ -1,10 +1,10 @@
 import './App.css';
+import AppBarMUI from './components/AppBarMUI'
 
 function App() {
   return (
     <div className="App">
-      <h1>Hellow World</h1>
-      
+      <AppBarMUI />     
     </div>
   );
 }
