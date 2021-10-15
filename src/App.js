@@ -3,6 +3,7 @@ import "./App.css";
 import AppBarMUI from "./components/AppBarMUI";
 import RecipeReviewCard from "./components/ItemCard";
 import axios from "axios";
+import { Grid } from "@mui/material";
 
 function App() {
   const [item, setItem] = useState([]);
@@ -18,9 +19,10 @@ function App() {
   return (
     <div className="App">
       <AppBarMUI />
+      <Grid direction="rows" container spacing={0}>
       {item.map((card, index) => {
         return (
-          <RecipeReviewCard className='cardPosition'
+          <RecipeReviewCard 
             key={index}
             id={index}
             title={card.title}
@@ -29,13 +31,10 @@ function App() {
             category={card.category}
             description={card.description}
           />
+          
         );
       })}
-      <div>
-        {item.map((card) => {
-          return <h1>{card.title}</h1>;
-        })}
-      </div>
+      </Grid>
     </div>
   );
 }

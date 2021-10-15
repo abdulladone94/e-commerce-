@@ -14,6 +14,7 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { Button } from '@mui/material';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -28,13 +29,15 @@ const ExpandMore = styled((props) => {
 
 export default function RecipeReviewCard(pro) {
   const [expanded, setExpanded] = React.useState(false);
+  const [count, setCount] = React.useState(1)
+ 
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345 }} >
       <CardHeader
         // avatar={
         //   <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -62,14 +65,17 @@ export default function RecipeReviewCard(pro) {
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
-          <AddCircleOutlineIcon />
+          <RemoveCircleOutlineIcon onClick={()=>{setCount (count<0 && count - 1 )}} />
         </IconButton>
           <Avatar sx={{ bgcolor: blue[500] }} aria-label="recipe">
-            2
+            {count}
           </Avatar>
         <IconButton aria-label="share">
-          <RemoveCircleOutlineIcon />
+          <AddCircleOutlineIcon onClick={()=>{setCount (count>0 ? count + 1 : 1)}} />
         </IconButton>
+        <Button variant="contained" size="small">
+          Add To Cart
+        </Button>
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}
