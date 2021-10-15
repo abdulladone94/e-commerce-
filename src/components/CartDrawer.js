@@ -6,21 +6,18 @@ import Button from "@mui/material/Button";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
 import axios from "axios";
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 export default function CartDrawer() {
-  const [cartItem, setCartItem] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
 
   useEffect(
     () =>
       axios.get("https://fakestoreapi.com/carts/user/2").then((response) => {
-        setCartItem(response.data);
+        setCartItems(response.data[0].products);
         console.log(response.data);
       }),
     []
@@ -49,14 +46,9 @@ export default function CartDrawer() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {cartItem.map((cart, index) => (
+        {cartItems.map((item, index) => (
           <ListItem button key={index}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              {cart.quantity}
-            </ListItemIcon>
-            <ListItemText primary={cart.date} />
-            {}
+            <ListItemText primary={item.quantity} />
             <IconButton aria-label="delete" color="primary">
               <DeleteIcon />
             </IconButton>
@@ -64,20 +56,6 @@ export default function CartDrawer() {
         ))}
       </List>
       <Divider />
-      <List>
-        {cartItem.map((text, index) => (
-          <ListItem button key={text.date}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text.products[0].quantity} />
-            <IconButton aria-label="delete" color="primary">
-              <DeleteIcon />
-            </IconButton>
-          </ListItem>
-        ))}
-      </List>
-      pay Now
     </Box>
   );
 
