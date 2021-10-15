@@ -78,12 +78,13 @@ export default function AppBarMUI() {
             aria-label="menu"
             sx={{ mr: 2 }}
           >
-          
-            <Button color="inherit"><ShoppingCartIcon /> <CartDrawer /> </Button>
+          <ShoppingCartIcon />
+          <CartDrawer /> 
           </IconButton>
           <Button color="inherit">Login</Button>
         </Toolbar>
       </AppBar>
+      
     </Box>
       
     </div>
