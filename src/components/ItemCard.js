@@ -39,11 +39,6 @@ export default function RecipeReviewCard(pro) {
   return (
     <Card sx={{ maxWidth: 345 }} >
       <CardHeader
-        // avatar={
-        //   <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-        //     R
-        //   </Avatar>
-        // }
         action={
           <IconButton aria-label="settings">
             <MoreVertIcon />
@@ -65,7 +60,7 @@ export default function RecipeReviewCard(pro) {
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
-          <RemoveCircleOutlineIcon onClick={()=>{setCount (count<0 && count - 1 )}} />
+          <RemoveCircleOutlineIcon onClick={()=>{setCount (count>1 ? count - 1 : 1 )}} />
         </IconButton>
           <Avatar sx={{ bgcolor: blue[500] }} aria-label="recipe">
             {count}

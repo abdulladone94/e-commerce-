@@ -9,6 +9,7 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import SearchIcon from '@mui/icons-material/Search';
+import CartDrawer from './CartDrawer';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -77,7 +78,8 @@ export default function AppBarMUI() {
             aria-label="menu"
             sx={{ mr: 2 }}
           >
-            <ShoppingCartIcon />
+          
+            <Button color="inherit"><ShoppingCartIcon /> <CartDrawer /> </Button>
           </IconButton>
           <Button color="inherit">Login</Button>
         </Toolbar>
