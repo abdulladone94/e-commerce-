@@ -6,33 +6,33 @@ import axios from "axios";
 import { Grid } from "@mui/material";
 
 function App() {
-  const [item, setItem] = useState([]);
+  const [allItems, setAllItems] = useState([]);
 
   useEffect(
     () =>
       axios.get("https://fakestoreapi.com/products").then((response) => {
-        setItem(response.data);
+        setAllItems(response.data);
       }),
     []
   );
 
   return (
     <div className="App">
-      <AppBarMUI />
-      <Grid direction="rows" container spacing={0}>
-      {item.map((card, index) => {
-        return (
-          <RecipeReviewCard 
-            key={index}
-            id={index}
-            title={card.title}
-            price={card.price}
-            image={card.image}
-            category={card.category}
-            description={card.description}
-          />
-        );
-      })}
+      <AppBarMUI allItems={allItems} />
+      <Grid direction="rows" container spacing={2} margin="5px" padding="5px">
+        {allItems.map((card, index) => {
+          return (
+            <RecipeReviewCard
+              key={index}
+              id={index}
+              title={card.title}
+              price={card.price}
+              image={card.image}
+              category={card.category}
+              description={card.description}
+            />
+          );
+        })}
       </Grid>
     </div>
   );

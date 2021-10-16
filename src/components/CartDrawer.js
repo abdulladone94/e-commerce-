@@ -11,16 +11,25 @@ import axios from "axios";
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-export default function CartDrawer() {
+export default function CartDrawer({ allItems }) {
   const [cartItems, setCartItems] = useState([]);
 
   useEffect(
     () =>
       axios.get("https://fakestoreapi.com/carts/user/2").then((response) => {
-        setCartItems(response.data[0].products);
-        console.log(response.data);
+        setCartItems(
+          response.data[0].products.map((cartItem) => {
+            const result = allItems.find((item) => {
+              return item.id === cartItem.productId;
+            });
+            return { ...cartItem, title: result.title };
+          })
+        );
+
+        console.log(response.data[0].products);
+        console.log(allItems);
       }),
-    []
+    [allItems]
   );
 
   const [state, setState] = React.useState({
@@ -42,12 +51,13 @@ export default function CartDrawer() {
     <Box
       sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
       role="presentation"
-      onClick={toggleDrawer(anchor, false)}
+      // onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
         {cartItems.map((item, index) => (
           <ListItem button key={index}>
+            <ListItemText primary={item.title} />
             <ListItemText primary={item.quantity} />
             <IconButton aria-label="delete" color="primary">
               <DeleteIcon />
