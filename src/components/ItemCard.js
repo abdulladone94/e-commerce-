@@ -14,6 +14,7 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Button } from "@mui/material";
+import axios from "axios";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -26,7 +27,7 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function RecipeReviewCard(props) {
+export default function ItemCard(props) {
   const [expanded, setExpanded] = React.useState(false);
   const [count, setCount] = React.useState(1);
 
@@ -34,6 +35,17 @@ export default function RecipeReviewCard(props) {
     setExpanded(!expanded);
   };
 
+  const addItemToCart = () => {
+    axios
+      .post("https://fakestoreapi.com/carts", {
+        userId: 1,
+        date: "2020-02-03",
+        products: [{ productId: props.productId, quantity: 1 }],
+      })
+      .then((response) => {
+        console.log(response.data);
+      });
+  };
   return (
     <Card sx={{ maxWidth: 345, margin: "5px" }}>
       <CardHeader title={props.title} subheader={"$" + props.price} />
@@ -66,7 +78,13 @@ export default function RecipeReviewCard(props) {
             }}
           />
         </IconButton>
-        <Button variant="contained" size="small">
+        <Button
+          variant="contained"
+          size="small"
+          onClick={() => {
+            addItemToCart();
+          }}
+        >
           Add To Cart
         </Button>
         <ExpandMore

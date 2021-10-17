@@ -7,22 +7,22 @@ import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
-import axios from "axios";
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import axios from "axios";
 
-export default function CartDrawer({ allItems }) {
+export default function CartDrawer({ allItems }, addItemToDrawer) {
   const [cartItems, setCartItems] = useState([]);
 
   useEffect(
     () =>
-      axios.get("https://fakestoreapi.com/carts/user/2").then((response) => {
+      axios.get("https://fakestoreapi.com/carts/user/1").then((response) => {
         setCartItems(
           response.data[0].products.map((cartItem) => {
             const result = allItems.find((item) => {
               return item.id === cartItem.productId;
             });
-            return { ...cartItem, title: result.title };
+            return { ...cartItem, title: result?.title };
           })
         );
 
