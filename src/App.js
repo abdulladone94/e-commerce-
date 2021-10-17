@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import AppBarMUI from "./components/AppBarMUI";
-import RecipeReviewCard from "./components/ItemCard";
+import ItemCard from "./components/ItemCard";
 import axios from "axios";
 import { Grid } from "@mui/material";
 
@@ -22,7 +22,7 @@ function App() {
       <Grid direction="rows" container spacing={2} margin="5px" padding="5px">
         {allItems.map((card, index) => {
           return (
-            <RecipeReviewCard
+            <ItemCard
               key={index}
               id={index}
               title={card.title}
@@ -30,6 +30,7 @@ function App() {
               image={card.image}
               category={card.category}
               description={card.description}
+              productId={card.id}
             />
           );
         })}
