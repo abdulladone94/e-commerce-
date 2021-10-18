@@ -10,8 +10,10 @@ import ListItemText from "@mui/material/ListItemText";
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
-export default function CartDrawer({ allItems }, addItemToDrawer) {
+export default function CartDrawer() {
+  const allItems = useSelector((state) => state.cart.allItems);
   const [cartItems, setCartItems] = useState([]);
 
   useEffect(
