@@ -1,4 +1,4 @@
-const initialState = { allItems: [] };
+const initialState = { allItems: [], cartItems: [] };
 
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -11,6 +11,11 @@ const cartReducer = (state = initialState, action) => {
       return {
         ...state,
         allItems: action.payload,
+      };
+    case "SET_CART_ITEMS":
+      return {
+        ...state,
+        cartItems: action.payload,
       };
     default:
       return state;
