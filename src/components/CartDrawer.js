@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import Button from "@mui/material/Button";
@@ -10,24 +10,30 @@ import ListItemText from "@mui/material/ListItemText";
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { setCartItems } from "../store/actions";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function CartDrawer() {
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart.cartItems);
+
   const allItems = useSelector((state) => state.cart.allItems);
-  const [cartItems, setCartItems] = useState([]);
+  // const [cartItems, setCartItems] = useState([]);
 
   const setCartItemsRes = React.useCallback(
     (respone) => {
-      setCartItems(
-        respone.data[0].products.map((cartItem) => {
-          const result = allItems.find((item) => {
-            return item.id === cartItem.productId;
-          });
-          return { ...cartItem, title: result?.title };
-        })
+      dispatch(
+        setCartItems(
+          respone.data[0].products.map((cartItem) => {
+            const result = allItems.find((item) => {
+              return item.id === cartItem.productId;
+            });
+            return { ...cartItem, title: result?.title };
+          })
+        )
       );
     },
-    [allItems]
+    [allItems, dispatch]
   );
 
   useEffect(
@@ -44,7 +50,7 @@ export default function CartDrawer() {
   const handleDelete = () => {
     axios.delete("https://fakestoreapi.com/carts/1").then((res) => {
       console.log(res.data);
-      axios.post("https://fakestoreapi.com/carts/user/3").then((respons) => {
+      axios.get("https://fakestoreapi.com/carts/user/2").then((respons) => {
         setCartItemsRes(respons);
       });
     });
