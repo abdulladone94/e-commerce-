@@ -10,27 +10,45 @@ import ListItemText from "@mui/material/ListItemText";
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
-export default function CartDrawer({ allItems }, addItemToDrawer) {
+export default function CartDrawer() {
+  const allItems = useSelector((state) => state.cart.allItems);
   const [cartItems, setCartItems] = useState([]);
+
+  const setCartItemsRes = React.useCallback(
+    (respone) => {
+      setCartItems(
+        respone.data[0].products.map((cartItem) => {
+          const result = allItems.find((item) => {
+            return item.id === cartItem.productId;
+          });
+          return { ...cartItem, title: result?.title };
+        })
+      );
+    },
+    [allItems]
+  );
 
   useEffect(
     () =>
-      axios.get("https://fakestoreapi.com/carts/user/1").then((response) => {
-        setCartItems(
-          response.data[0].products.map((cartItem) => {
-            const result = allItems.find((item) => {
-              return item.id === cartItem.productId;
-            });
-            return { ...cartItem, title: result?.title };
-          })
-        );
+      axios.get("https://fakestoreapi.com/carts/user/1").then((responsee) => {
+        setCartItemsRes(responsee);
 
-        console.log(response.data[0].products);
+        console.log(responsee.data[0].products);
         console.log(allItems);
       }),
-    [allItems]
+    [allItems, setCartItemsRes]
   );
+
+  const handleDelete = () => {
+    axios.delete("https://fakestoreapi.com/carts/1").then((res) => {
+      console.log(res.data);
+      axios.post("https://fakestoreapi.com/carts/user/3").then((respons) => {
+        setCartItemsRes(respons);
+      });
+    });
+  };
 
   const [state, setState] = React.useState({
     right: false,
@@ -59,7 +77,11 @@ export default function CartDrawer({ allItems }, addItemToDrawer) {
           <ListItem button key={index}>
             <ListItemText primary={item.title} />
             <ListItemText primary={item.quantity} />
-            <IconButton aria-label="delete" color="primary">
+            <IconButton
+              aria-label="delete"
+              color="primary"
+              onClick={handleDelete}
+            >
               <DeleteIcon />
             </IconButton>
           </ListItem>

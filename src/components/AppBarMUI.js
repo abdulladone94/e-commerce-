@@ -51,7 +51,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function AppBarMUI({ allItems }) {
+export default function AppBarMUI() {
   return (
     <div className="App">
       <Box sx={{ flexGrow: 1 }}>
@@ -79,7 +79,7 @@ export default function AppBarMUI({ allItems }) {
               sx={{ mr: 2 }}
             >
               <ShoppingCartIcon />
-              <CartDrawer allItems={allItems} />
+              <CartDrawer />
             </IconButton>
             <Button color="inherit">Login</Button>
           </Toolbar>
