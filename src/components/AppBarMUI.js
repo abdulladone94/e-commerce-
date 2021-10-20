@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-duplicate-props */
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import { styled, alpha } from "@mui/material/styles";
@@ -55,7 +56,7 @@ export default function AppBarMUI() {
   return (
     <div className="App">
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static">
+        <AppBar position="static" position="fixed">
           <Toolbar>
             <Typography
               variant="h6"
