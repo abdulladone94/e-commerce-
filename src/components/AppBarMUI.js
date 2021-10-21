@@ -6,9 +6,6 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import SearchIcon from "@mui/icons-material/Search";
 import CartDrawer from "./CartDrawer";
 
@@ -63,7 +60,7 @@ export default function AppBarMUI() {
               component="div"
               sx={{ flexGrow: 1 }}
             ></Typography>
-            <Search>
+            <Search style={{ width: "700px", marginRight: "600px" }}>
               <SearchIconWrapper>
                 <SearchIcon />
               </SearchIconWrapper>
@@ -72,17 +69,7 @@ export default function AppBarMUI() {
                 inputProps={{ "aria-label": "search" }}
               />
             </Search>
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              sx={{ mr: 2 }}
-            >
-              <ShoppingCartIcon />
-              <CartDrawer />
-            </IconButton>
-            <Button color="inherit">Login</Button>
+            <CartDrawer />
           </Toolbar>
         </AppBar>
       </Box>

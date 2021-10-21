@@ -2,7 +2,6 @@ import * as React from "react";
 import { useEffect } from "react";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
-import Button from "@mui/material/Button";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
@@ -12,6 +11,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
 import { setCartItems } from "../store/actions";
 import { useSelector, useDispatch } from "react-redux";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 export default function CartDrawer() {
   const dispatch = useDispatch();
@@ -101,7 +101,16 @@ export default function CartDrawer() {
     <div>
       {["right"].map((anchor) => (
         <React.Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+          <IconButton
+            onClick={toggleDrawer(anchor, true)}
+            size="small"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+          >
+            <ShoppingCartIcon />
+          </IconButton>
           <Drawer
             anchor={anchor}
             open={state[anchor]}

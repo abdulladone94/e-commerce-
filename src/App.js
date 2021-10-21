@@ -33,7 +33,7 @@ function App() {
       </button>
       <h1>{simpleActionData}</h1> */}
       <AppBarMUI />
-      <Grid direction="rows" container spacing={2} margin="5px" padding="5px">
+      <Grid direction="rows" container spacing={2} margin="5px" padding="15px">
         {allItems.map((card, index) => {
           return (
             <ItemCard
