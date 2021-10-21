@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-duplicate-props */
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import { styled, alpha } from "@mui/material/styles";
@@ -5,9 +6,6 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import SearchIcon from "@mui/icons-material/Search";
 import CartDrawer from "./CartDrawer";
 
@@ -54,34 +52,25 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function AppBarMUI() {
   return (
     <div className="App">
-      <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static">
+      <Box sx={{ flexGrow: 1, paddingBottom: "60px" }}>
+        <AppBar position="static" position="fixed">
           <Toolbar>
             <Typography
               variant="h6"
               component="div"
               sx={{ flexGrow: 1 }}
             ></Typography>
-            <Search>
+            <Search sx={{ marginRight: "1000px" }}>
               <SearchIconWrapper>
                 <SearchIcon />
               </SearchIconWrapper>
               <StyledInputBase
+                alignItems="center"
                 placeholder="Search…"
                 inputProps={{ "aria-label": "search" }}
               />
             </Search>
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              sx={{ mr: 2 }}
-            >
-              <ShoppingCartIcon />
-              <CartDrawer />
-            </IconButton>
-            <Button color="inherit">Login</Button>
+            <CartDrawer />
           </Toolbar>
         </AppBar>
       </Box>

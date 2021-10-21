@@ -6,13 +6,11 @@ import axios from "axios";
 import { Grid } from "@mui/material";
 import { setAllItems } from "./store/actions";
 import { useDispatch, useSelector } from "react-redux";
+import { Footer } from "./Footer";
 
 function App() {
   const dispatch = useDispatch();
-  // const simpleActionData = useSelector((state) => state.cart.result);
   const allItems = useSelector((state) => state.cart.allItems);
-
-  // const [allItems, setAllItems] = useState([]);
 
   useEffect(
     () =>
@@ -24,16 +22,8 @@ function App() {
 
   return (
     <div className="App">
-      {/* <button
-        onClick={() => {
-          dispatch(simpleAction());
-        }}
-      >
-        Click
-      </button>
-      <h1>{simpleActionData}</h1> */}
       <AppBarMUI />
-      <Grid direction="rows" container spacing={2} margin="5px" padding="5px">
+      <Grid direction="rows" container spacing={2} margin="5px" padding="15px">
         {allItems.map((card, index) => {
           return (
             <ItemCard
@@ -49,6 +39,7 @@ function App() {
           );
         })}
       </Grid>
+      <Footer />
     </div>
   );
 }

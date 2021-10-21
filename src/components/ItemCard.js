@@ -1,39 +1,20 @@
 import * as React from "react";
-import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
-import Collapse from "@mui/material/Collapse";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { blue } from "@mui/material/colors";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Button } from "@mui/material";
 import axios from "axios";
 
-const ExpandMore = styled((props) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
-  marginLeft: "auto",
-  transition: theme.transitions.create("transform", {
-    duration: theme.transitions.duration.shortest,
-  }),
-}));
-
 export default function ItemCard(props) {
-  const [expanded, setExpanded] = React.useState(false);
   const [count, setCount] = React.useState(1);
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
 
   const addItemToCart = () => {
     axios
@@ -43,12 +24,27 @@ export default function ItemCard(props) {
         products: [{ productId: props.productId, quantity: 1 }],
       })
       .then((response) => {
-        console.log(response.data);
+        alert("Add to cart item id " + response.data._id);
       });
   };
   return (
-    <Card sx={{ maxWidth: 345, margin: "5px" }}>
-      <CardHeader title={props.title} subheader={"$" + props.price} />
+    <Card
+      sx={{
+        height: "440px",
+        width: "200px",
+        maxWidth: 345,
+        display: "table",
+        padding: "15px 50px",
+        margin: "1px 15px",
+      }}
+    >
+      <CardHeader
+        sx={{
+          padding: "10px",
+        }}
+        title={props.title.substring(0, 23)}
+        subheader={"$" + props.price}
+      />
       <CardMedia
         component="img"
         height="194"
@@ -79,6 +75,7 @@ export default function ItemCard(props) {
           />
         </IconButton>
         <Button
+          style={{ fontSize: "10px" }}
           variant="contained"
           size="small"
           onClick={() => {
@@ -87,21 +84,7 @@ export default function ItemCard(props) {
         >
           Add To Cart
         </Button>
-        <ExpandMore
-          expand={expanded}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </ExpandMore>
       </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>Description:</Typography>
-          <Typography paragraph>{props.description}</Typography>
-        </CardContent>
-      </Collapse>
     </Card>
   );
 }
