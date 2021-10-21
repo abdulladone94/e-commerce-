@@ -55,7 +55,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function AppBarMUI() {
   return (
     <div className="App">
-      <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{ flexGrow: 1, paddingBottom: "60px" }}>
         <AppBar position="static" position="fixed">
           <Toolbar>
             <Typography

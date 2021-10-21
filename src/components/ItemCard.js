@@ -43,12 +43,30 @@ export default function ItemCard(props) {
         products: [{ productId: props.productId, quantity: 1 }],
       })
       .then((response) => {
+        alert("Add to cart item id " + response.data._id);
         console.log(response.data);
       });
   };
   return (
-    <Card sx={{ maxWidth: 345, margin: "5px" }}>
-      <CardHeader title={props.title} subheader={"$" + props.price} />
+    <Card
+      sx={{
+        height: "440px",
+        width: "230px",
+        maxWidth: 345,
+        margin: "14px",
+        marginLeft: "5px",
+        // display: "flex",
+        // justifyContent: "center",
+        padding: "5px",
+      }}
+    >
+      <CardHeader
+        sx={{
+          padding: "10px",
+        }}
+        title={props.title.substring(0, 23)}
+        subheader={"$" + props.price}
+      />
       <CardMedia
         component="img"
         height="194"
@@ -79,6 +97,7 @@ export default function ItemCard(props) {
           />
         </IconButton>
         <Button
+          style={{ fontSize: "10px" }}
           variant="contained"
           size="small"
           onClick={() => {
