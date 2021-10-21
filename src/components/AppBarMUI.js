@@ -60,11 +60,12 @@ export default function AppBarMUI() {
               component="div"
               sx={{ flexGrow: 1 }}
             ></Typography>
-            <Search style={{ width: "700px", marginRight: "600px" }}>
+            <Search sx={{ marginRight: "1000px" }}>
               <SearchIconWrapper>
                 <SearchIcon />
               </SearchIconWrapper>
               <StyledInputBase
+                alignItems="center"
                 placeholder="Search…"
                 inputProps={{ "aria-label": "search" }}
               />

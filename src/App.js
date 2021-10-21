@@ -6,6 +6,7 @@ import axios from "axios";
 import { Grid } from "@mui/material";
 import { setAllItems } from "./store/actions";
 import { useDispatch, useSelector } from "react-redux";
+import { Footer } from "./Footer";
 
 function App() {
   const dispatch = useDispatch();
@@ -49,6 +50,7 @@ function App() {
           );
         })}
       </Grid>
+      <Footer />
     </div>
   );
 }
