@@ -10,10 +10,7 @@ import { Footer } from "./Footer";
 
 function App() {
   const dispatch = useDispatch();
-  // const simpleActionData = useSelector((state) => state.cart.result);
   const allItems = useSelector((state) => state.cart.allItems);
-
-  // const [allItems, setAllItems] = useState([]);
 
   useEffect(
     () =>
@@ -25,14 +22,6 @@ function App() {
 
   return (
     <div className="App">
-      {/* <button
-        onClick={() => {
-          dispatch(simpleAction());
-        }}
-      >
-        Click
-      </button>
-      <h1>{simpleActionData}</h1> */}
       <AppBarMUI />
       <Grid direction="rows" container spacing={2} margin="5px" padding="15px">
         {allItems.map((card, index) => {

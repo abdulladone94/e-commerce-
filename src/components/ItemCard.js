@@ -25,20 +25,17 @@ export default function ItemCard(props) {
       })
       .then((response) => {
         alert("Add to cart item id " + response.data._id);
-        console.log(response.data);
       });
   };
   return (
     <Card
       sx={{
         height: "440px",
-        width: "230px",
+        width: "200px",
         maxWidth: 345,
-        margin: "14px",
-        marginLeft: "5px",
-        // display: "flex",
-        // justifyContent: "center",
-        padding: "5px",
+        display: "table",
+        padding: "15px 50px",
+        margin: "1px 15px",
       }}
     >
       <CardHeader

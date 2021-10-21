@@ -18,8 +18,6 @@ export default function CartDrawer() {
   const cartItems = useSelector((state) => state.cart.cartItems);
 
   const allItems = useSelector((state) => state.cart.allItems);
-  // const [cartItems, setCartItems] = useState([]);
-
   const setCartItemsRes = React.useCallback(
     (respone) => {
       dispatch(
@@ -75,7 +73,6 @@ export default function CartDrawer() {
     <Box
       sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
       role="presentation"
-      // onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
